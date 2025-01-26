@@ -1,0 +1,53 @@
+CREATE OR REPLACE  PROCEDURE "USV08"."ADD_ARTICLE" (code In 
+    VarChar2, name In VarChar2, u In VarChar2, count In VarChar2,
+    price In Number, discount In Number) as
+Begin
+  Insert Into Articulo Values(code, name, u, count);
+  Insert Into Precios Values(code, name, price, discount);
+End ADD_ARTICLE;
+/
+CREATE OR REPLACE  PROCEDURE "USV08"."ADD_COUNT" (code In 
+    VarChar2, nLevel In VarChar2) as
+Begin
+  Insert Into Cuentas_cont Values(code, nLevel);
+End ADD_COUNT;
+/
+CREATE OR REPLACE  PROCEDURE "USV08"."ADD_PAYTYPE" (code In 
+    VarChar2, description In VarChar2) as
+Begin
+  Insert Into Tipos_de_pago Values(code, description);
+End ADD_PAYTYPE;
+/
+CREATE OR REPLACE  PROCEDURE "USV08"."ADD_PRICE" (code In 
+    VarChar2, name In VarChar2, price In Number, discount In 
+    Number) as
+Begin
+  Insert Into Precios Values(code, name, price, discount);
+End ADD_PRICE;
+/
+CREATE OR REPLACE  PROCEDURE "USV08"."ADD_PURCHASEBILL" (idNumber
+    In VarChar2, today in Date, supplier In VarChar2, payType In 
+    VarChar2, count_cred In VarChar2, days In VarChar2, u In 
+    VarChar2, article In VarChar2, quantity In Number, discount 
+    In Number, total In Number) as
+Begin
+ Insert Into Factura_compra Values(idNumber, today, supplier, payType, count_cred, days, u, article, discount);
+ Insert Into Compras Values(supplier, idNumber, article, quantity, total);
+End ADD_PURCHASEBILL;
+/
+CREATE OR REPLACE  PROCEDURE "USV08"."ADD_SALEBILL" (idNumber In 
+    VarChar2, today In Date, client In VarChar2, payType In 
+    VarChar2, count_cred In VarChar2, days In VarChar2, article 
+    In VarChar2, quantity In Number, discount In Number) as
+Begin
+  Insert Into Factura_venta Values(idNumber, today, client, payType, count_cred, days, article, discount);
+  Insert Into Ventas Values(client, idNumber, article, quantity);
+End ADD_SALEBILL;
+/
+CREATE OR REPLACE  PROCEDURE "USV08"."ADD_SUPPLIER" (code In 
+    VarChar2, name In VarChar2, idNumber In VarChar2, setCredit 
+    In VarChar2, phone In VarChar2, country In VarChar2, county 
+    In VarChar2) as
+Begin
+  Insert Into Proveedor Values(code, name, idNumber, setCredit, phone , country , county);
+End ADD_SUPPLIER;
